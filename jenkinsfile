@@ -6,8 +6,8 @@ pipeline {
     stage('Clone repository') {
       steps {
         checkout scm
-        bat 'echo $BRANCH_NAME'
-        bat 'echo $JOB_BASE_NAME'
+        bat 'echo $env.JOB_NAME'
+        bat 'echo $env.JOB_BASE_NAME'
       }
     }
 }
