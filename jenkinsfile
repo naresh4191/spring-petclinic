@@ -1,13 +1,53 @@
 pipeline {
-  agent any
-  
-  stages {
-    stage('Clone repository') {
-      steps {
-        checkout scm
-        sh 'echo $MYJOB'
-        sh 'echo $PERSON'
-      }
+    agent none
+    tools {
+        maven "maven-3.6.0"
     }
-}
+    stages {
+        stage('git version') {
+        agent { label "slave-win" }
+            steps {
+               bat 'git --version'
+            }
+        }
+        
+        stage('git Checkout') {
+        input { message "are you sure"}
+        agent { label "slave-win" }
+            steps {
+              checkout scm 
+            }
+        }
+        
+        stage('java check') {
+        agent { label "slave-win" }
+            steps {
+               bat 'java -version' 
+            }
+        }
+        
+        stage('maven version check') {
+        agent { label "slave-win" }
+           steps {
+              bat 'mvn --version'
+           }
+        }
+        
+        stage('maven package') {
+        agent { label "slave-win" }
+           steps {
+               bat 'mvn clean package'
+           }
+           post {
+              always { junit "**/target/surefire-reports/*.xml" }
+            }
+        }
+        
+        //stage('jar deployment') {
+        //agent { label "slave-win" }
+           //steps {
+               //bat 'java -jar "target/spring-petclinic-2.1.0.BUILD-SNAPSHOT.jar"'
+          // }
+       // }
+    }
 }
