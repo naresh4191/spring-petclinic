@@ -6,8 +6,8 @@ pipeline {
     stage('Clone repository') {
       steps {
         checkout scm
-        bat 'echo ${env.JENKINS_HOME} on ${env.JOB_URL}'
-        bat 'echo $env.JOB_BASE_NAME'
+        echo ${env.JENKINS_HOME}  
+        echo ${env.JOB_URL}
       }
     }
 }
