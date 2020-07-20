@@ -14,7 +14,7 @@ node{
      withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
         sh "docker login -u kishan428 -p ${dockerHubPwd}"
      }
-     sh 'docker push kishan428/spring-petclinic'
+     sh 'docker push kishan428/spring-petclinic:2.0.0'
    }
    stage('Run docker on Dev Server'){
      def dockerUpdate = 'sudo apt-get update -y'
