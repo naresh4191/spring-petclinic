@@ -23,7 +23,7 @@ node{
        sh "ssh -o StrictHostKeyChecking=no ubuntu@18.221.246.100 ${dockerUpdate}"
        sh "ssh -o StrictHostKeyChecking=no ubuntu@18.221.246.100 ${dockerInstall}"
        sh "ssh -o StrictHostKeyChecking=no ubuntu@18.221.246.100 sudo systemctl start docker"
-	   sh "ssh -o StrictHostKeyChecking=no ubuntu@18.221.246.100 sudo usermod -aG docker ubuntu"
+       sh "ssh -o StrictHostKeyChecking=no ubuntu@18.221.246.100 sudo usermod -aG docker ubuntu"
      }
    }
    stage('Run Container on Dev Server'){
